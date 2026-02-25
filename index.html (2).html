@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>แบบประเมินการรับรู้ฯ | โรงพยาบาลธัญญารักษ์ปัตตานี 2569</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --primary: #1a3a5c;
+    --primary-light: #2056a0;
+    --accent: #00b4d8;
+    --success: #2ec4b6;
+    --warning: #f4a261;
+    --danger: #e76f51;
+    --bg: #f0f4f8;
+    --card: #ffffff;
+    --text: #1e2d3d;
+    --text-light: #5a6a7a;
+    --border: #d0dce8;
+    --sidebar-w: 260px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Sarabun', sans-serif; background: var(--bg); color: var(--text); display: flex; min-height: 100vh; font-size: 15px; }
+
+  /* SIDEBAR */
+  .sidebar { width: var(--sidebar-w); background: linear-gradient(180deg, var(--primary) 0%, #0d2840 100%); min-height: 100vh; position: fixed; left: 0; top: 0; display: flex; flex-direction: column; z-index: 100; box-shadow: 4px 0 20px rgba(0,0,0,0.15); }
+  .sidebar-brand { padding: 20px 18px 16px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .sidebar-brand .logo-ring { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--primary-light)); display: flex; align-items: center; justify-content: center; font-size: 20px; margin-bottom: 8px; }
+  .sidebar-brand h2 { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.5; }
+  .sidebar-brand p { color: rgba(255,255,255,0.5); font-size: 11px; margin-top: 2px; }
+  .sidebar-nav { padding: 12px 10px; flex: 1; overflow-y: auto; }
+  .nav-section-label { color: rgba(255,255,255,0.35); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 10px 8px 4px; }
+  .nav-item { display: flex; align-items: center; gap: 8px; padding: 9px 10px; border-radius: 8px; color: rgba(255,255,255,0.65); cursor: pointer; transition: all 0.2s; font-size: 13px; margin-bottom: 2px; }
+  .nav-item:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  .nav-item.active { background: linear-gradient(135deg, var(--accent), var(--primary-light)); color: #fff; font-weight: 600; }
+  .nav-item .icon { font-size: 14px; width: 18px; text-align: center; }
+  .sidebar-footer { padding: 12px 18px; border-top: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.4); font-size: 10px; }
+
+  /* MAIN */
+  .main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; }
+  .topbar { background: #fff; border-bottom: 1px solid var(--border); padding: 0 24px; height: 60px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 50; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+  .topbar-title h1 { font-size: 16px; font-weight: 700; color: var(--primary); }
+  .topbar-title p { font-size: 11px; color: var(--text-light); }
+  .topbar-actions { display: flex; gap: 8px; align-items: center; }
+  .btn { padding: 7px 16px; border-radius: 8px; font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; display: flex; align-items: center; gap: 6px; }
+  .btn-primary { background: var(--primary-light); color: #fff; }
+  .btn-primary:hover { background: var(--primary); }
+  .btn-outline { background: transparent; color: var(--primary); border: 1.5px solid var(--border); }
+  .btn-success { background: var(--success); color: #fff; }
+  .content { padding: 24px; flex: 1; }
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 20px; }
+  .stat-card { background: var(--card); border-radius: 12px; padding: 18px; border: 1px solid var(--border); position: relative; overflow: hidden; }
+  .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+  .stat-card.blue::before { background: linear-gradient(90deg, var(--primary-light), var(--accent)); }
+  .stat-card.teal::before { background: linear-gradient(90deg, var(--success), #06d6a0); }
+  .stat-card.orange::before { background: linear-gradient(90deg, var(--warning), #f77f00); }
+  .stat-card.red::before { background: linear-gradient(90deg, var(--danger), #ff6b6b); }
+  .stat-icon { font-size: 26px; margin-bottom: 6px; }
+  .stat-value { font-size: 28px; font-weight: 800; color: var(--primary); line-height: 1; margin-bottom: 3px; }
+  .stat-label { font-size: 12px; color: var(--text-light); font-weight: 500; }
+  .stat-badge { display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px; margin-top: 6px; }
+  .badge-success { background: #d1fae5; color: #065f46; }
+  .badge-warning { background: #fef3c7; color: #92400e; }
+  .badge-danger { background: #fee2e2; color: #991b1b; }
+
+  /* CARDS */
+  .chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .card { background: var(--card); border-radius: 12px; padding: 18px; border: 1px solid var(--border); box-shadow: 0 2px 8px rgba(0,0,0,0.04); margin-bottom: 16px; }
+  .card:last-child { margin-bottom: 0; }
+  .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .card-title { font-size: 14px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+
+  /* BAR CHART */
+  .bar-chart { display: flex; flex-direction: column; gap: 10px; }
+  .bar-item { display: flex; flex-direction: column; gap: 3px; }
+  .bar-meta { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-light); }
+  .bar-meta strong { color: var(--text); font-weight: 600; }
+  .bar-track { height: 9px; background: var(--bg); border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; transition: width 1s cubic-bezier(0.34,1.56,0.64,1); }
+  .bar-fill.good { background: linear-gradient(90deg, #059669, #06d6a0); }
+  .bar-fill.medium { background: linear-gradient(90deg, #f59e0b, #f4a261); }
+  .bar-fill.low { background: linear-gradient(90deg, #ef4444, #ff6b6b); }
+
+  /* DONUT */
+  .donut-wrap { display: flex; align-items: center; justify-content: center; gap: 20px; }
+  .donut-chart { width: 130px; height: 130px; border-radius: 50%; position: relative; flex-shrink: 0; }
+  .donut-inner { position: absolute; inset: 20px; background: #fff; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+  .donut-value { font-size: 22px; font-weight: 800; color: var(--primary); }
+  .donut-sub { font-size: 10px; color: var(--text-light); }
+  .legend-list { display: flex; flex-direction: column; gap: 7px; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 12px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* HEATMAP */
+  .heatmap-grid { display: grid; grid-template-columns: 160px repeat(4, 1fr); gap: 4px; font-size: 12px; }
+  .heatmap-header { background: var(--bg); border-radius: 6px; padding: 6px 8px; text-align: center; font-weight: 700; color: var(--text-light); font-size: 11px; }
+  .heatmap-label { background: var(--primary); color: #fff; border-radius: 6px; padding: 8px; display: flex; align-items: center; font-weight: 600; font-size: 11px; }
+  .heatmap-cell { border-radius: 6px; padding: 8px 4px; text-align: center; font-weight: 700; font-size: 12px; color: #fff; }
+  .h-vg { background: #059669; } .h-g { background: #10b981; } .h-m { background: #f59e0b; } .h-l { background: #ef4444; } .h-vl { background: #991b1b; }
+
+  /* ALERTS */
+  .alert-list { display: flex; flex-direction: column; gap: 8px; }
+  .alert-item { display: flex; gap: 10px; padding: 10px; border-radius: 8px; border: 1px solid; }
+  .alert-item.alert-danger { background: #fff5f5; border-color: #fecaca; }
+  .alert-item.alert-warning { background: #fffbeb; border-color: #fde68a; }
+  .alert-item.alert-success { background: #f0fdf4; border-color: #bbf7d0; }
+  .alert-icon { font-size: 18px; flex-shrink: 0; }
+  .alert-body p { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+  .alert-body span { font-size: 12px; color: var(--text-light); }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th { background: var(--primary); color: #fff; padding: 9px 12px; text-align: left; font-weight: 600; font-size: 12px; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+  tr:hover td { background: var(--bg); }
+  .score-pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+  .pill-good { background: #d1fae5; color: #065f46; }
+  .pill-medium { background: #fef3c7; color: #92400e; }
+  .pill-low { background: #fee2e2; color: #991b1b; }
+
+  /* ==================== FORM ==================== */
+  .form-container { max-width: 820px; margin: 0 auto; }
+  .form-progress-bar { height: 5px; background: var(--border); border-radius: 99px; margin-bottom: 20px; overflow: hidden; }
+  .form-progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-light), var(--accent)); border-radius: 99px; transition: width 0.5s; }
+  .form-step-indicator { display: flex; gap: 6px; margin-bottom: 20px; align-items: center; }
+  .step-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--border); color: var(--text-light); transition: all 0.3s; cursor: pointer; flex-shrink: 0; }
+  .step-dot.done { background: #d1fae5; border-color: #059669; color: #065f46; }
+  .step-dot.active { background: var(--primary-light); border-color: var(--primary-light); color: #fff; box-shadow: 0 0 0 3px rgba(32,86,160,0.2); }
+  .step-line { flex: 1; height: 2px; background: var(--border); }
+  .step-line.done { background: #059669; }
+
+  .form-section { background: var(--card); border-radius: 14px; border: 1px solid var(--border); margin-bottom: 0; overflow: hidden; display: none; }
+  .form-section.active { display: block; }
+  .form-section-header { background: linear-gradient(135deg, var(--primary), var(--primary-light)); color: #fff; padding: 14px 22px; }
+  .form-section-header h3 { font-size: 15px; font-weight: 700; }
+  .form-section-header p { font-size: 12px; opacity: 0.75; margin-top: 2px; }
+  .form-body { padding: 18px 22px; }
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 7px; display: block; line-height: 1.5; }
+  .form-label .req { color: var(--danger); margin-left: 3px; }
+  .form-select, .form-textarea { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-family: 'Sarabun', sans-serif; font-size: 13px; color: var(--text); background: #fff; transition: border-color 0.2s; }
+  .form-select:focus, .form-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,180,216,0.1); }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.6; }
+
+  /* Radio / Checkbox grid */
+  .radio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .radio-grid.col3 { grid-template-columns: repeat(3, 1fr); }
+  .radio-option { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 13px; background: #fff; }
+  .radio-option:hover { border-color: var(--accent); background: #f0fdff; }
+  .radio-option input { accent-color: var(--primary-light); width: 15px; height: 15px; flex-shrink: 0; }
+  .radio-option.selected { background: #eff6ff; border-color: var(--primary-light); font-weight: 600; }
+  .checkbox-option { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 13px; background: #fff; }
+  .checkbox-option:hover { border-color: var(--accent); background: #f0fdff; }
+  .checkbox-option input { accent-color: var(--primary-light); width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* Likert Scale row */
+  .likert-block { background: var(--bg); border-radius: 10px; padding: 3px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .likert-q-text { font-size: 13px; font-weight: 600; color: var(--text); padding: 10px 12px 6px; line-height: 1.5; }
+  .likert-q-sub { font-size: 11px; color: var(--text-light); padding: 0 12px 8px; font-style: italic; }
+  .likert-scale-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; padding: 0 8px 8px; }
+  .likert-opt { text-align: center; }
+  .likert-opt input { display: none; }
+  .likert-opt label { display: block; padding: 7px 2px; border-radius: 7px; font-size: 11px; font-weight: 700; cursor: pointer; border: 1.5px solid var(--border); transition: all 0.15s; color: var(--text-light); background: #fff; line-height: 1.2; }
+  .likert-opt input:checked + label { background: var(--primary-light); border-color: var(--primary-light); color: #fff; }
+  .likert-opt label:hover { border-color: var(--accent); }
+
+  /* Binary Q (รับรู้/ไม่รับรู้) */
+  .binary-block { background: var(--bg); border-radius: 10px; padding: 3px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .binary-q-text { font-size: 13px; font-weight: 600; color: var(--text); padding: 10px 12px 8px; line-height: 1.5; }
+  .binary-highlight { font-size: 12px; color: var(--primary-light); padding: 4px 12px 8px; font-style: italic; border-left: 3px solid var(--accent); margin: 0 12px 8px; background: rgba(0,180,216,0.06); border-radius: 0 6px 6px 0; line-height: 1.6; }
+  .binary-options { display: flex; gap: 8px; padding: 0 12px 10px; }
+  .binary-opt { flex: 1; text-align: center; }
+  .binary-opt input { display: none; }
+  .binary-opt label { display: block; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: 700; cursor: pointer; border: 2px solid var(--border); transition: all 0.15s; color: var(--text-light); background: #fff; }
+  .binary-opt input:checked + label { color: #fff; }
+  .binary-opt.yes input:checked + label { background: var(--success); border-color: var(--success); }
+  .binary-opt.no input:checked + label { background: var(--danger); border-color: var(--danger); }
+  .binary-opt label:hover { border-color: var(--accent); }
+
+  /* Section group header inside form */
+  .section-group-header { background: rgba(32,86,160,0.08); border-left: 3px solid var(--primary-light); padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 10px; }
+  .section-group-header h4 { font-size: 13px; font-weight: 700; color: var(--primary); }
+  .section-group-header p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+  /* Nav buttons */
+  .form-nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0 0; }
+  .form-nav-right { display: flex; gap: 8px; }
+
+  /* LANDING */
+  .landing-hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 100%); border-radius: 16px; padding: 36px; color: #fff; margin-bottom: 20px; position: relative; overflow: hidden; }
+  .landing-hero::after { content: ''; position: absolute; right: -40px; bottom: -60px; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.04); }
+  .landing-hero h1 { font-size: 22px; font-weight: 800; margin-bottom: 8px; line-height: 1.4; }
+  .landing-hero p { font-size: 14px; opacity: 0.85; max-width: 500px; line-height: 1.7; }
+  .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 24px; }
+  .hero-stat { background: rgba(255,255,255,0.12); border-radius: 10px; padding: 12px 14px; border: 1px solid rgba(255,255,255,0.2); }
+  .hero-stat .value { font-size: 24px; font-weight: 800; }
+  .hero-stat .label { font-size: 11px; opacity: 0.75; margin-top: 2px; }
+  .info-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 20px; }
+  .info-card { background: var(--card); border-radius: 12px; padding: 18px; border: 1px solid var(--border); text-align: center; cursor: pointer; transition: transform 0.2s; }
+  .info-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+  .info-card .ico { font-size: 30px; margin-bottom: 8px; }
+  .info-card h3 { font-size: 14px; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+  .info-card p { font-size: 12px; color: var(--text-light); line-height: 1.5; }
+
+  /* REC */
+  .rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .rec-card { border-radius: 10px; padding: 14px; border: 1px solid; }
+  .rec-card.urgent { background: #fff5f5; border-color: #fecaca; }
+  .rec-card.medium-r { background: #fffbeb; border-color: #fde68a; }
+  .rec-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 8px; display: flex; gap: 5px; align-items: center; }
+  .rec-card ul { list-style: none; }
+  .rec-card li { font-size: 12px; color: var(--text-light); padding: 3px 0 3px 14px; position: relative; line-height: 1.5; }
+  .rec-card li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: #fff; padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1); z-index: 999; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* SUCCESS SCREEN */
+  .success-screen { text-align: center; padding: 40px 20px; }
+  .success-screen .big-icon { font-size: 64px; margin-bottom: 16px; }
+  .success-screen h2 { font-size: 24px; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
+  .success-screen p { font-size: 14px; color: var(--text-light); max-width: 400px; margin: 0 auto 20px; line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo-ring">🏥</div>
+    <h2>ระบบประเมินการรับรู้<br>แผนปฏิบัติราชการ 2569</h2>
+    <p>รพ.ธัญญารักษ์ปัตตานี</p>
+  </div>
+  <div class="sidebar-nav">
+    <div class="nav-section-label">เมนูหลัก</div>
+    <div class="nav-item active" onclick="showPage('landing')"><span class="icon">🏠</span> หน้าหลัก</div>
+    <div class="nav-item" onclick="showPage('form')"><span class="icon">📋</span> เข้าทำแบบประเมิน</div>
+    <div class="nav-section-label">วิเคราะห์ผล</div>
+    <div class="nav-item" onclick="showPage('dashboard')"><span class="icon">📊</span> Dashboard ผู้บริหาร</div>
+    <div class="nav-item" onclick="showPage('heatmap')"><span class="icon">🗺️</span> Heat Map จุดอ่อน</div>
+    <div class="nav-item" onclick="showPage('report')"><span class="icon">📑</span> รายงานผลรายหน่วย</div>
+    <div class="nav-item" onclick="showPage('recommend')"><span class="icon">💡</span> ข้อเสนอแนะเชิงกลยุทธ์</div>
+    <div class="nav-section-label">ระบบ</div>
+    <div class="nav-item" onclick="showPage('export')"><span class="icon">📤</span> Export รายงาน</div>
+  </div>
+  <div class="sidebar-footer">ปีงบประมาณ 2569 • 57 ข้อ • 4 ส่วน</div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-title">
+      <h1 id="page-title">หน้าหลัก</h1>
+      <p id="page-sub">ระบบประเมินการรับรู้ฯ โรงพยาบาลธัญญารักษ์ปัตตานี ปีงบ 2569</p>
+    </div>
+    <div class="topbar-actions">
+      <span style="font-size:12px;color:var(--text-light);">25 ก.พ. 2569</span>
+      <button class="btn btn-primary" onclick="showPage('form')">+ ทำแบบประเมิน</button>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- ===== LANDING ===== -->
+    <div id="page-landing" class="page active">
+      <div class="landing-hero">
+        <h1>(ร่าง) แบบประเมินการรับรู้และความเข้าใจ<br>ของบุคลากรต่อทิศทางการดำเนินงาน ปีงบประมาณ 2569</h1>
+        <p>ภารกิจด้านการพยาบาล โรงพยาบาลธัญญารักษ์ปัตตานี<br>แบบสอบถาม 4 ส่วน 57 ข้อ — Anonymous • Real-time Dashboard</p>
+        <div class="hero-stats">
+          <div class="hero-stat"><div class="value">1</div><div class="label">บุคลากรตอบแล้ว (ทดสอบระบบ)</div></div>
+          <div class="hero-stat"><div class="value">0.7%</div><div class="label">อัตราการตอบ (เป้าหมาย 151 คน)</div></div>
+          <div class="hero-stat"><div class="value">—</div><div class="label">คะแนนรับรู้เฉลี่ย (รอข้อมูล)</div></div>
+        </div>
+      </div>
+      <div class="info-cards">
+        <div class="info-card" onclick="showPage('form')">
+          <div class="ico">📋</div><h3>เข้าทำแบบประเมิน</h3>
+          <p>4 ส่วน 57 ข้อ ใช้เวลา 15-20 นาที ไม่เก็บชื่อ</p>
+        </div>
+        <div class="info-card" onclick="showPage('dashboard')">
+          <div class="ico">📊</div><h3>Dashboard ผู้บริหาร</h3>
+          <p>Real-time กราฟ Heat Map Radar MOPHDMS</p>
+        </div>
+        <div class="info-card" onclick="showPage('recommend')">
+          <div class="ico">💡</div><h3>ข้อเสนอแนะอัตโนมัติ</h3>
+          <p>วิเคราะห์จุดอ่อนและแนะนำแผนพัฒนา</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📌 โครงสร้างแบบสอบถาม 4 ส่วน (57 ข้อ)</div></div>
+        <div class="bar-chart">
+          <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 1: ข้อมูลส่วนบุคคล</strong><span>6 ข้อ (หน่วยงาน ตำแหน่ง เพศ อายุ การศึกษา ระยะเวลา)</span></div><div class="bar-track"><div class="bar-fill good" style="width:100%"></div></div></div>
+          <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 2: การรับรู้และความเข้าใจทิศทางองค์กร</strong><span>14 ข้อ (วิสัยทัศน์ พันธกิจ แผนปฏิบัติราชการ)</span></div><div class="bar-track"><div class="bar-fill good" style="width:86%"></div></div></div>
+          <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: การนำไปใช้และปฏิบัติ</strong><span>3 + 38 ข้อ (ใช้แผน + ค่านิยม MOPHDMS)</span></div><div class="bar-track"><div class="bar-fill medium" style="width:74%"></div></div></div>
+          <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 4: ช่องทางการรับรู้และการสื่อสาร + ข้อเสนอแนะ</strong><span>3 ข้อ</span></div><div class="bar-track"><div class="bar-fill low" style="width:55%"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FORM ===== -->
+    <div id="page-form" class="page">
+      <div class="form-container">
+
+        <!-- Step indicator -->
+        <div class="form-step-indicator" id="stepIndicator">
+          <div class="step-dot active" id="dot1" onclick="goStep(1)">1</div>
+          <div class="step-line" id="line1"></div>
+          <div class="step-dot" id="dot2" onclick="goStep(2)">2</div>
+          <div class="step-line" id="line2"></div>
+          <div class="step-dot" id="dot3" onclick="goStep(3)">3</div>
+          <div class="step-line" id="line3"></div>
+          <div class="step-dot" id="dot4" onclick="goStep(4)">4</div>
+          <span style="font-size:12px;color:var(--text-light);margin-left:8px;" id="stepLabel">ส่วนที่ 1: ข้อมูลทั่วไป</span>
+        </div>
+        <div class="form-progress-bar"><div class="form-progress-fill" id="formProgress" style="width:25%"></div></div>
+
+        <!-- ===== SECTION 1: ข้อมูลทั่วไป ===== -->
+        <div class="form-section active" id="formStep1">
+          <div class="form-section-header">
+            <h3>👤 ส่วนที่ 1: ข้อมูลส่วนบุคคล</h3>
+            <p>ข้อมูลสำหรับวิเคราะห์แบ่งกลุ่ม — ไม่เก็บชื่อ-นามสกุล (Anonymous)</p>
+          </div>
+          <div class="form-body">
+
+            <div class="form-group">
+              <label class="form-label">1. หน่วยงาน <span class="req">*</span></label>
+              <div class="radio-grid">
+                <label class="radio-option"><input type="radio" name="unit" value="OPD"> OPD (ผู้ป่วยนอก)</label>
+                <label class="radio-option"><input type="radio" name="unit" value="IPD1"> IPD1 (ผู้ป่วยใน 1)</label>
+                <label class="radio-option"><input type="radio" name="unit" value="IPD2"> IPD2 (ผู้ป่วยใน 2)</label>
+                <label class="radio-option"><input type="radio" name="unit" value="วิชาการ"> กลุ่มงานวิชาการพยาบาล</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">2. ตำแหน่ง <span class="req">*</span></label>
+              <div class="radio-grid">
+                <label class="radio-option"><input type="radio" name="position" value="ชำนาญการพิเศษ"> พยาบาลวิชาชีพชำนาญการพิเศษ</label>
+                <label class="radio-option"><input type="radio" name="position" value="ชำนาญการ"> พยาบาลวิชาชีพชำนาญการ</label>
+                <label class="radio-option"><input type="radio" name="position" value="ปฏิบัติการ"> พยาบาลวิชาชีพปฏิบัติการ</label>
+                <label class="radio-option"><input type="radio" name="position" value="ลูกจ้าง"> ลูกจ้างประจำ</label>
+                <label class="radio-option"><input type="radio" name="position" value="พนักงานราชการ"> พนักงานราชการ</label>
+                <label class="radio-option"><input type="radio" name="position" value="จ้างเหมา"> จ้างเหมาบริการ</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">3. เพศ <span class="req">*</span></label>
+              <div class="radio-grid">
+                <label class="radio-option"><input type="radio" name="gender" value="หญิง"> ♀ หญิง</label>
+                <label class="radio-option"><input type="radio" name="gender" value="ชาย"> ♂ ชาย</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">4. อายุ <span class="req">*</span></label>
+              <div class="radio-grid col3">
+                <label class="radio-option"><input type="radio" name="age" value="<20"> ต่ำกว่า 20 ปี</label>
+                <label class="radio-option"><input type="radio" name="age" value="20-29"> 20 - 29 ปี</label>
+                <label class="radio-option"><input type="radio" name="age" value="30-39"> 30 - 39 ปี</label>
+                <label class="radio-option"><input type="radio" name="age" value="40-49"> 40 - 49 ปี</label>
+                <label class="radio-option"><input type="radio" name="age" value="50+"> 50 ปีขึ้นไป</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">5. ระดับการศึกษาสูงสุด <span class="req">*</span></label>
+              <div class="radio-grid col3">
+                <label class="radio-option"><input type="radio" name="edu" value="ต่ำกว่าป.ตรี"> ต่ำกว่าปริญญาตรี</label>
+                <label class="radio-option"><input type="radio" name="edu" value="ป.ตรี"> ปริญญาตรี</label>
+                <label class="radio-option"><input type="radio" name="edu" value="ป.โทขึ้นไป"> ปริญญาโทและสูงกว่า</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">6. ระยะเวลาที่ปฏิบัติงานในโรงพยาบาลธัญญารักษ์ปัตตานี <span class="req">*</span></label>
+              <div class="radio-grid col3">
+                <label class="radio-option"><input type="radio" name="exp" value="<2"> น้อยกว่า 2 ปี</label>
+                <label class="radio-option"><input type="radio" name="exp" value="3-5"> 3 - 5 ปี</label>
+                <label class="radio-option"><input type="radio" name="exp" value="6-10"> 6 - 10 ปี</label>
+                <label class="radio-option"><input type="radio" name="exp" value="11-15"> 11 - 15 ปี</label>
+                <label class="radio-option"><input type="radio" name="exp" value="16-20"> 16 - 20 ปี</label>
+                <label class="radio-option"><input type="radio" name="exp" value="21+"> 21 ปีขึ้นไป</label>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <div></div>
+              <div class="form-nav-right">
+                <button class="btn btn-primary" onclick="nextStep(2)">ถัดไป: การรับรู้ทิศทางองค์กร →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 2: การรับรู้ทิศทางองค์กร ===== -->
+        <div class="form-section" id="formStep2">
+          <div class="form-section-header">
+            <h3>🎯 ส่วนที่ 2: การรับรู้และความเข้าใจทิศทางขององค์กร</h3>
+            <p>ตอบว่า "รับรู้" หรือ "ไม่รับรู้" ในแต่ละข้อ (14 ข้อ)</p>
+          </div>
+          <div class="form-body">
+
+            <!-- วิสัยทัศน์ -->
+            <div class="section-group-header">
+              <h4>🔭 วิสัยทัศน์และปรัชญา</h4>
+              <p>วิสัยทัศน์ / ปรัชญา ขององค์กรและโรงพยาบาล</p>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 1. ท่านรับรู้ว่า วิสัยทัศน์ของโรงพยาบาล คือ</div>
+              <div class="binary-highlight">"รพ.เฉพาะทางต้นแบบการเรียนรู้ด้านวิชาการและการบำบัดผู้ป่วยยาและสารเสพติดเพื่อการแพทย์ที่สมคุณค่าในเขตสุขภาพที่ 12 ปี 2570"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q1" id="q1y" value="1"><label for="q1y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q1" id="q1n" value="0"><label for="q1n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 2. ท่านรับรู้ว่า วิสัยทัศน์ขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"องค์กรพยาบาลต้นแบบด้านวิชาการและการพยาบาลผู้ป่วยยาและสารเสพติดในเขตสุขภาพที่ 12 ในปี 2570"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q2" id="q2y" value="1"><label for="q2y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q2" id="q2n" value="0"><label for="q2n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 3. ท่านรับรู้ว่า ปรัชญาขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"การบริหารการพยาบาลดี ส่งเสริมให้พยาบาลมีบทบาทในการประสานและพัฒนาคุณภาพงานคลินิกบริการ ทำให้ผู้รับบริการเกิดความมั่นใจว่าพยาบาลที่อยู่นั้นเป็นไปอย่างคุณภาพตามมาตรฐานและจริยธรรม"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q3" id="q3y" value="1"><label for="q3y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q3" id="q3n" value="0"><label for="q3n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <!-- พันธกิจโรงพยาบาล -->
+            <div class="section-group-header" style="margin-top:16px;">
+              <h4>🏥 พันธกิจโรงพยาบาล</h4>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 4. ท่านรับรู้ว่า พันธกิจโรงพยาบาล คือ</div>
+              <div class="binary-highlight">"พัฒนา ถ่ายทอดองค์ความรู้ นวัตกรรม เทคโนโลยีด้านการบำบัดผู้ป่วยยาและสารเสพติดโดยสร้างความร่วมมือกับภาคีเครือข่ายและการบริหารจัดการที่มีประสิทธิภาพ"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q4" id="q4y" value="1"><label for="q4y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q4" id="q4n" value="0"><label for="q4n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <!-- พันธกิจองค์กรพยาบาล -->
+            <div class="section-group-header" style="margin-top:16px;">
+              <h4>👩‍⚕️ พันธกิจองค์กรพยาบาล</h4>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 5. ท่านรับรู้ว่า ส่วนหนึ่งของพันธกิจองค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"ศึกษาวิเคราะห์ วิจัย และพัฒนาองค์ความรู้เทคโนโลยีทางการพยาบาลเฉพาะทางในกลุ่มผู้ติดยาและสารเสพติด"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q5" id="q5y" value="1"><label for="q5y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q5" id="q5n" value="0"><label for="q5n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 6. ท่านรับรู้ว่า ส่วนหนึ่งของพันธกิจองค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"ถ่ายทอดองค์ความรู้และเทคโนโลยีทางการพยาบาลเฉพาะทางแก่สถานบริการสุขภาพทั้งภาครัฐและเอกชน"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q6" id="q6y" value="1"><label for="q6y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q6" id="q6n" value="0"><label for="q6n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 7. ท่านรับรู้ว่า ส่วนหนึ่งของพันธกิจองค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"จัดให้บริการพยาบาลเพื่อรองรับการส่งต่อระดับตติยภูมิในกลุ่มผู้ติดยาและสารเสพติด"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q7" id="q7y" value="1"><label for="q7y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q7" id="q7n" value="0"><label for="q7n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 8. ท่านรับรู้ว่า ส่วนหนึ่งของพันธกิจองค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"ให้การเพิ่มพูนความรู้และทักษะในการปฏิบัติการพยาบาลยาและสารเสพติดแก่พยาบาลในสถานบริการสุขภาพทั้งภาครัฐและเอกชน"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q8" id="q8y" value="1"><label for="q8y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q8" id="q8n" value="0"><label for="q8n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <!-- แผนปฏิบัติราชการ -->
+            <div class="section-group-header" style="margin-top:16px;">
+              <h4>📋 ประเด็นแผนปฏิบัติราชการองค์กรพยาบาล</h4>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 9. ท่านรับรู้ว่า แผนปฏิบัติราชการที่ 1 ขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"ยกระดับการบำบัดรักษาผู้ป่วยยาและสารเสพติดที่มีความยุ่งยากซับซ้อน"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q9" id="q9y" value="1"><label for="q9y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q9" id="q9n" value="0"><label for="q9n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 10. ท่านรับรู้ว่า แผนปฏิบัติราชการที่ 2 ขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"ยกระดับเครือข่ายด้านการบำบัดรักษาในเขตสุขภาพที่ 12 ตามมาตรฐาน"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q10" id="q10y" value="1"><label for="q10y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q10" id="q10n" value="0"><label for="q10n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 11. ท่านรับรู้ว่า แผนปฏิบัติราชการที่ 3 ขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"พัฒนาและถ่ายทอดวิชาการทางการแพทย์ด้านยาและสารเสพติดได้มาตรฐานเป็นที่ยอมรับ"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q11" id="q11y" value="1"><label for="q11y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q11" id="q11n" value="0"><label for="q11n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 12. ท่านรับรู้ว่า แผนปฏิบัติราชการที่ 4 ขององค์กรพยาบาล คือ</div>
+              <div class="binary-highlight">"พัฒนาระบบบริหารจัดการให้ทันสมัยภายใต้หลักธรรมาภิบาล มีสมรรถนะสูง พร้อมรับต่อการเปลี่ยนแปลง"</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q12" id="q12y" value="1"><label for="q12y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q12" id="q12n" value="0"><label for="q12n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 13. ท่านรับรู้ว่า วิสัยทัศน์ พันธกิจ ประเด็นแผนปฏิบัติราชการขององค์กรพยาบาล มีความชัดเจนและสามารถนำไปปฏิบัติได้ เช่น สามารถนำไปวางแผนพัฒนาระบบงานดูแลผู้ป่วยยาและสารเสพติด เป็นต้น</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q13" id="q13y" value="1"><label for="q13y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q13" id="q13n" value="0"><label for="q13n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="binary-block">
+              <div class="binary-q-text">ข้อ 14. ท่านรับรู้ว่า วิสัยทัศน์ พันธกิจ ประเด็นแผนปฏิบัติราชการขององค์กรพยาบาล สามารถสะท้อนความต้องการของผู้รับบริการ/ผู้มีส่วนได้ส่วนเสีย และตอบสนองกับสถานการณ์ในอนาคต</div>
+              <div class="binary-options">
+                <div class="binary-opt yes"><input type="radio" name="q14" id="q14y" value="1"><label for="q14y">✓ รับรู้</label></div>
+                <div class="binary-opt no"><input type="radio" name="q14" id="q14n" value="0"><label for="q14n">✗ ไม่รับรู้</label></div>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button class="btn btn-outline" onclick="prevStep(1)">← ย้อนกลับ</button>
+              <div class="form-nav-right"><button class="btn btn-primary" onclick="nextStep(3)">ถัดไป: การนำไปปฏิบัติ →</button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 3: การนำไปปฏิบัติ + MOPHDMS ===== -->
+        <div class="form-section" id="formStep3">
+          <div class="form-section-header">
+            <h3>⚡ ส่วนที่ 3: การนำวิสัยทัศน์ พันธกิจ แผนปฏิบัติราชการและค่านิยมไปปฏิบัติ</h3>
+            <p>ประเมินระดับ: 5=มากที่สุด → 1=น้อยที่สุด (ข้อ 15-54)</p>
+          </div>
+          <div class="form-body">
+
+            <!-- การนำแผนไปปฏิบัติ -->
+            <div class="section-group-header">
+              <h4>📌 วิสัยทัศน์/พันธกิจ/แผนปฏิบัติราชการ</h4>
+            </div>
+
+            <div class="likert-block">
+              <div class="likert-q-text">ข้อ 15. ท่านได้นำวิสัยทัศน์ขององค์กรพยาบาล มาใช้ในการทำงาน</div>
+              <div class="likert-q-sub">เช่น จัดทำงานวิจัย/R2R/CQI ในการพัฒนางาน/ดูแลผู้ป่วยยาและสารเสพติด</div>
+              <div class="likert-scale-row">
+                <div class="likert-opt"><input type="radio" name="q15" id="q15_5" value="5"><label for="q15_5">5<br>มากที่สุด</label></div>
+                <div class="likert-opt"><input type="radio" name="q15" id="q15_4" value="4"><label for="q15_4">4<br>มาก</label></div>
+                <div class="likert-opt"><input type="radio" name="q15" id="q15_3" value="3"><label for="q15_3">3<br>ปานกลาง</label></div>
+                <div class="likert-opt"><input type="radio" name="q15" id="q15_2" value="2"><label for="q15_2">2<br>น้อย</label></div>
+                <div class="likert-opt"><input type="radio" name="q15" id="q15_1" value="1"><label for="q15_1">1<br>น้อยที่สุด</label></div>
+              </div>
+            </div>
+
+            <div class="likert-block">
+              <div class="likert-q-text">ข้อ 16. ท่านได้นำพันธกิจขององค์กรพยาบาล มาใช้ในงาน</div>
+              <div class="likert-q-sub">เช่น จัดทำวิจัย/พัฒนาองค์ความรู้เทคโนโลยีทางการพยาบาลเฉพาะทางในกลุ่มผู้ติดยาและสารเสพติด</div>
+              <div class="likert-scale-row">
+                <div class="likert-opt"><input type="radio" name="q16" id="q16_5" value="5"><label for="q16_5">5<br>มากที่สุด</label></div>
+                <div class="likert-opt"><input type="radio" name="q16" id="q16_4" value="4"><label for="q16_4">4<br>มาก</label></div>
+                <div class="likert-opt"><input type="radio" name="q16" id="q16_3" value="3"><label for="q16_3">3<br>ปานกลาง</label></div>
+                <div class="likert-opt"><input type="radio" name="q16" id="q16_2" value="2"><label for="q16_2">2<br>น้อย</label></div>
+                <div class="likert-opt"><input type="radio" name="q16" id="q16_1" value="1"><label for="q16_1">1<br>น้อยที่สุด</label></div>
+              </div>
+            </div>
+
+            <div class="likert-block">
+              <div class="likert-q-text">ข้อ 17. ท่านได้นำประเด็นแผนปฏิบัติราชการขององค์กรพยาบาลไปปรับใช้ในการปฏิบัติงานของท่าน</div>
+              <div class="likert-q-sub">เช่น พัฒนาระบบงานดูแลผู้ป่วยยาและสารเสพติด / พัฒนาบุคลากร / พัฒนางานวิชาการ(จัดทำวิจัย/R2R/CQI)</div>
+              <div class="likert-scale-row">
+                <div class="likert-opt"><input type="radio" name="q17" id="q17_5" value="5"><label for="q17_5">5<br>มากที่สุด</label></div>
+                <div class="likert-opt"><input type="radio" name="q17" id="q17_4" value="4"><label for="q17_4">4<br>มาก</label></div>
+                <div class="likert-opt"><input type="radio" name="q17" id="q17_3" value="3"><label for="q17_3">3<br>ปานกลาง</label></div>
+                <div class="likert-opt"><input type="radio" name="q17" id="q17_2" value="2"><label for="q17_2">2<br>น้อย</label></div>
+                <div class="likert-opt"><input type="radio" name="q17" id="q17_1" value="1"><label for="q17_1">1<br>น้อยที่สุด</label></div>
+              </div>
+            </div>
+
+            <!-- MOPHDMS -->
+            <div class="section-group-header" style="margin-top:16px;">
+              <h4>🌟 M — Mastery: เป็นนายตนเอง</h4>
+              <p>"หมั่นฝึกฝนตนเองให้มีศักยภาพ ยึดมั่นในความถูกต้อง มีวินัย ปฏิบัติตามกฎระเบียบ บนพื้นฐานของการมีสำนึกรับผิดชอบ คุณธรรมและจริยธรรม"</p>
+            </div>
+            <script>
+            // Generate MOPHDMS questions inline
+            </script>
+
+            <!-- M: 17-23 (renumbered as 18-23 from doc) -->
+            <div id="mophdms-questions"></div>
+
+            <div class="form-nav">
+              <button class="btn btn-outline" onclick="prevStep(2)">← ย้อนกลับ</button>
+              <div class="form-nav-right"><button class="btn btn-primary" onclick="nextStep(4)">ถัดไป: ช่องทางสื่อสาร →</button></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ===== SECTION 4: ช่องทางสื่อสาร + ข้อเสนอแนะ ===== -->
+        <div class="form-section" id="formStep4">
+          <div class="form-section-header">
+            <h3>📡 ส่วนที่ 4: ช่องทางการรับรู้และการสื่อสาร + ข้อเสนอแนะ</h3>
+            <p>ข้อ 55-57 (เลือกได้มากกว่า 1 ข้อในข้อ 55 และ 56)</p>
+          </div>
+          <div class="form-body">
+
+            <div class="form-group">
+              <label class="form-label">ข้อ 55. ท่านรับทราบข้อมูลและข่าวสารเรื่องทิศทางการดำเนินงานขององค์กรพยาบาล (วิสัยทัศน์ พันธกิจ ประเด็นแผนปฏิบัติราชการ เป้าประสงค์ และค่านิยม) จากช่องทางการสื่อสารใดบ้าง <span class="req">*</span><br><span style="font-weight:400;font-size:12px;color:var(--text-light);">(ตอบได้มากกว่า 1 ข้อ)</span></label>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="ผู้บริหาร"> 👔 ผู้บริหาร</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="เพื่อนร่วมงาน"> 👥 เพื่อนร่วมงาน</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="หนังสือยุทธศาสตร์"> 📕 หนังสือยุทธศาสตร์</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="เว็บไซต์"> 🌐 เว็บไซต์ของโรงพยาบาล</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="ป้ายประกาศ"> 🪧 ป้ายประกาศ</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="การประชุม"> 📢 การประชุม</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="เอกสารเผยแพร่"> 📄 เอกสารเผยแพร่</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch55" value="โปสเตอร์/แผ่นพับ"> 🗂️ โปสเตอร์ หรือ แผ่นพับ</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ข้อ 56. ท่านคิดว่าช่องทางการสื่อสารใดที่จะทำให้บุคลากรในองค์กรพยาบาล สามารถรับทราบถึง วิสัยทัศน์ พันธกิจ ประเด็นแผนปฏิบัติราชการ เป้าประสงค์และค่านิยม ได้ง่ายและทั่วถึงมากที่สุด <span class="req">*</span><br><span style="font-weight:400;font-size:12px;color:var(--text-light);">(ตอบได้มากกว่า 1 ข้อ)</span></label>
+              <div style="display:flex;flex-direction:column;gap:6px;">
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="ผู้บริหาร"> 👔 ผู้บริหาร</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="เพื่อนร่วมงาน"> 👥 เพื่อนร่วมงาน</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="หนังสือยุทธศาสตร์"> 📕 หนังสือยุทธศาสตร์</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="เว็บไซต์"> 🌐 เว็บไซต์ของโรงพยาบาล</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="ป้ายประกาศ"> 🪧 ป้ายประกาศ</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="การประชุม"> 📢 การประชุม</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="เอกสารเผยแพร่"> 📄 เอกสารเผยแพร่</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="โปสเตอร์/แผ่นพับ"> 🗂️ โปสเตอร์ หรือ แผ่นพับ</label>
+                <label class="checkbox-option"><input type="checkbox" name="ch56" value="ไลน์โรงพยาบาล"> 📱 ไลน์โรงพยาบาล / เสียงตามสาย</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">ข้อ 57. ข้อเสนอแนะต่อแผนปฏิบัติราชการและวัฒนธรรมองค์กร เพื่อการพัฒนาและปรับปรุงกระบวนงาน</label>
+              <textarea class="form-textarea" name="q57" rows="4" placeholder="กรุณาระบุข้อเสนอแนะของท่าน..."></textarea>
+            </div>
+
+            <div class="form-nav">
+              <button class="btn btn-outline" onclick="prevStep(3)">← ย้อนกลับ</button>
+              <div class="form-nav-right">
+                <button class="btn btn-primary" onclick="submitForm()" style="background:#059669;">✓ ส่งแบบประเมิน</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUCCESS -->
+        <div class="form-section" id="formSuccess">
+          <div class="form-body">
+            <div class="success-screen">
+              <div class="big-icon">🎉</div>
+              <h2>ขอบคุณสำหรับการตอบแบบประเมิน!</h2>
+              <p>ข้อมูลของท่านถูกบันทึกเรียบร้อยแล้ว<br>ผลการประเมินจะถูกนำไปวิเคราะห์เพื่อพัฒนาองค์กรพยาบาล รพ.ธัญญารักษ์ปัตตานี ต่อไป</p>
+              <div style="display:flex;gap:10px;justify-content:center;">
+                <button class="btn btn-outline" onclick="resetForm()">📋 ทำแบบประเมินใหม่</button>
+                <button class="btn btn-primary" onclick="showPage('dashboard')">📊 ดู Dashboard</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /form-container -->
+    </div><!-- /page-form -->
+
+    <!-- ===== DASHBOARD ===== -->
+    <div id="page-dashboard" class="page">
+      <div class="stats-grid">
+        <div class="stat-card blue"><div class="stat-icon">👥</div><div class="stat-value">1</div><div class="stat-label">จำนวนผู้ตอบ (4 ส่วน 57 ข้อ)</div><span class="stat-badge badge-warning">⏳ รอข้อมูลเพิ่มเติม</span></div>
+        <div class="stat-card teal"><div class="stat-icon">🎯</div><div class="stat-value">—</div><div class="stat-label">การรับรู้วิสัยทัศน์ (ข้อ 1-2)</div><span class="stat-badge badge-warning">รอข้อมูลจริง</span></div>
+        <div class="stat-card orange"><div class="stat-icon">📋</div><div class="stat-value">—</div><div class="stat-label">การรับรู้พันธกิจ (ข้อ 4-8)</div><span class="stat-badge badge-warning">รอข้อมูลจริง</span></div>
+        <div class="stat-card red"><div class="stat-icon">⭐</div><div class="stat-value">—</div><div class="stat-label">Mean MOPHDMS (ข้อ 18-54)</div><span class="stat-badge badge-warning">รอข้อมูลจริง</span></div>
+      </div>
+
+      <div class="chart-grid">
+        <div class="card">
+          <div class="card-header"><div class="card-title">📊 คะแนนการรับรู้แยกตามหน่วยงาน (4 หน่วย)</div></div>
+          <div class="bar-chart">
+            <div class="bar-item"><div class="bar-meta"><strong>OPD (n=1)</strong><span style="color:#6b7280;font-weight:700;">— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+            <div class="bar-item"><div class="bar-meta"><strong>IPD1 (n=0)</strong><span style="color:#6b7280;font-weight:700;">— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+            <div class="bar-item"><div class="bar-meta"><strong>IPD2 (n=0)</strong><span style="color:#6b7280;font-weight:700;">— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+            <div class="bar-item"><div class="bar-meta"><strong>กลุ่มงานวิชาการพยาบาล (n=0)</strong><span style="color:#6b7280;font-weight:700;">— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill low" style="width:0%"></div></div></div>
+          </div>
+          <div style="margin-top:14px;padding-top:10px;border-top:1px solid var(--border);">
+            <div class="bar-chart">
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 2: รับรู้วิสัยทัศน์/พันธกิจ/แผน (ข้อ 1-14)</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: การนำแผนไปปฏิบัติ (ข้อ 15-17)</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม M (Mastery) ข้อ 18-23</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม O (Originality) ข้อ 24-29</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม P (People Centered) ข้อ 30-34</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม H (Humility) ข้อ 35-39</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม D (Determination) ข้อ 40-44</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม M (Moving Together) ข้อ 45-49</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><strong>ส่วนที่ 3: ค่านิยม S (Specialist) ข้อ 50-54</strong><span>— รอข้อมูล</span></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header"><div class="card-title">🥧 ระดับการรับรู้ภาพรวม</div></div>
+          <div class="donut-wrap">
+            <div class="donut-chart" style="background:conic-gradient(#d1d5db 0deg 360deg);">
+              <div class="donut-inner"><div class="donut-value" style="font-size:18px;">รอข้อมูล</div><div class="donut-sub">n=1 คน</div></div>
+            </div>
+            <div class="legend-list">
+              <div class="legend-item"><span class="legend-dot" style="background:#059669;"></span>ดีมาก ≥80%: <strong>—</strong></div>
+              <div class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>ปานกลาง 60-79%: <strong>—</strong></div>
+              <div class="legend-item"><span class="legend-dot" style="background:#ef4444;"></span>ต้องพัฒนา &lt;60%: <strong>—</strong></div>
+            </div>
+          </div>
+          <div style="margin-top:16px;border-top:1px solid var(--border);padding-top:14px;">
+            <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:8px;">📡 ช่องทางสื่อสารที่ได้ผลสูงสุด (ข้อ 55)</div>
+            <div class="bar-chart">
+              <div class="bar-item"><div class="bar-meta"><span>การประชุม</span><strong>— รอข้อมูล</strong></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><span>ผู้บริหาร</span><strong>— รอข้อมูล</strong></div><div class="bar-track"><div class="bar-fill good" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><span>เพื่อนร่วมงาน</span><strong>— รอข้อมูล</strong></div><div class="bar-track"><div class="bar-fill medium" style="width:0%"></div></div></div>
+              <div class="bar-item"><div class="bar-meta"><span>ป้ายประกาศ</span><strong>— รอข้อมูล</strong></div><div class="bar-track"><div class="bar-fill low" style="width:0%"></div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><div class="card-title">🚨 สัญญาณเตือนอัตโนมัติ (Auto-Alert)</div></div>
+        <div class="alert-list">
+          <div class="alert-item" style="background:#f8fafc;border-color:#e2e8f0;">
+            <div class="alert-icon">⏳</div>
+            <div class="alert-body">
+              <p style="color:#64748b;">รอการเก็บข้อมูลจากบุคลากร</p>
+              <span>ขณะนี้มีผู้ตอบแบบประเมิน 1 คน (ทดสอบระบบ) — ระบบจะแสดงสัญญาณเตือนและข้อเสนอแนะอัตโนมัติเมื่อมีข้อมูลเพียงพอสำหรับการวิเคราะห์</span>
+            </div>
+          </div>
+          <div class="alert-item" style="background:#eff6ff;border-color:#bfdbfe;">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-body">
+              <p style="color:#1d4ed8;">เกณฑ์การแปลผลที่ใช้</p>
+              <span>≥80% = ✅ ดีมาก &nbsp;|&nbsp; 60–79% = ⚠️ ปานกลาง &nbsp;|&nbsp; &lt;60% = 🔴 ต้องพัฒนา</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== HEATMAP ===== -->
+    <div id="page-heatmap" class="page">
+      <div class="card">
+        <div class="card-header"><div class="card-title">🗺️ Heat Map จุดอ่อน — แยกตามหน่วยงาน × ส่วนของแบบสอบถาม</div></div>
+        <div class="heatmap-grid">
+          <div class="heatmap-header"></div>
+          <div class="heatmap-header">OPD</div>
+          <div class="heatmap-header">IPD1</div>
+          <div class="heatmap-header">IPD2</div>
+          <div class="heatmap-header">วิชาการ</div>
+          <div class="heatmap-label">ส่วน 2: วิสัยทัศน์</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 2: พันธกิจ รพ.</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 2: แผนปฏิบัติ</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: นำแผนไปปฏิบัติ</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: M (Mastery)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: O (Originality)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: P (People)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: H (Humility)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: D (Determination)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: M (Moving Together)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 3: S (Specialist)</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+          <div class="heatmap-label">ส่วน 4: ช่องทางสื่อสาร</div>
+          <div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div><div class="heatmap-cell" style="background:#e5e7eb;color:#9ca3af;">—</div>
+        </div>
+        <div style="display:flex;gap:10px;margin-top:14px;font-size:11px;flex-wrap:wrap;">
+          <span><span style="display:inline-block;width:12px;height:12px;background:#059669;border-radius:2px;"></span> ≥90%</span>
+          <span><span style="display:inline-block;width:12px;height:12px;background:#10b981;border-radius:2px;"></span> 80-89%</span>
+          <span><span style="display:inline-block;width:12px;height:12px;background:#f59e0b;border-radius:2px;"></span> 60-79%</span>
+          <span><span style="display:inline-block;width:12px;height:12px;background:#ef4444;border-radius:2px;"></span> 50-59%</span>
+          <span><span style="display:inline-block;width:12px;height:12px;background:#991b1b;border-radius:2px;"></span> &lt;50% วิกฤต</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== REPORT ===== -->
+    <div id="page-report" class="page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📑 รายงานผลรายหน่วยงาน (4 ส่วน)</div>
+          <button class="btn btn-success" style="font-size:12px;">📊 Export Excel</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>หน่วยงาน</th><th>n</th>
+                <th>ส่วน2<br>วิสัยทัศน์/พันธกิจ/แผน</th>
+                <th>ส่วน3<br>นำแผนไปใช้</th>
+                <th>ส่วน3<br>MOPHDMS รวม</th>
+                <th>ส่วน4<br>ช่องทางสื่อสาร</th>
+                <th>ภาพรวม</th><th>สถานะ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>OPD</strong></td><td>1</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>—</strong></td><td><span class="score-pill" style="background:#f1f5f9;color:#64748b;">รอข้อมูล</span></td></tr>
+              <tr><td><strong>IPD1</strong></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>—</strong></td><td><span class="score-pill" style="background:#f1f5f9;color:#64748b;">รอข้อมูล</span></td></tr>
+              <tr><td><strong>IPD2</strong></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>—</strong></td><td><span class="score-pill" style="background:#f1f5f9;color:#64748b;">รอข้อมูล</span></td></tr>
+              <tr><td><strong>วิชาการพยาบาล</strong></td><td>0</td><td>—</td><td>—</td><td>—</td><td>—</td><td><strong>—</strong></td><td><span class="score-pill" style="background:#f1f5f9;color:#64748b;">รอข้อมูล</span></td></tr>
+              <tr style="background:#f8fafc;"><td><strong>รวม</strong></td><td><strong>1</strong></td><td><strong>—</strong></td><td><strong>—</strong></td><td><strong>—</strong></td><td><strong>—</strong></td><td><strong style="color:#64748b">—</strong></td><td><span class="score-pill" style="background:#f1f5f9;color:#64748b;">รอข้อมูล</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== RECOMMEND ===== -->
+    <div id="page-recommend" class="page">
+      <div class="card" style="background:linear-gradient(135deg,#1a3a5c,#2056a0);color:#fff;margin-bottom:16px;">
+        <div style="font-size:15px;font-weight:800;margin-bottom:4px;">💡 ระบบวิเคราะห์เชิงกลยุทธ์อัตโนมัติ — อิงจากแบบสอบถาม 4 ส่วน 57 ข้อ</div>
+        <p style="opacity:0.8;font-size:13px;">⏳ ขณะนี้มีผู้ตอบ 1 คน (ทดสอบระบบ) — ข้อเสนอแนะด้านล่างเป็นแนวทางที่ระบบเตรียมไว้ล่วงหน้า จะแสดงผลจริงเมื่อมีข้อมูลเพียงพอ</p>
+      </div>
+      <div class="rec-grid">
+        <div class="rec-card urgent">
+          <h4 style="color:#b91c1c;">🚨 เร่งด่วน: กลุ่มงานวิชาการ (57%)</h4>
+          <ul>
+            <li>จัด Workshop ถ่ายทอดแผนปฏิบัติราชการข้อ 3 เฉพาะกลุ่ม</li>
+            <li>จัดทำ "คู่มือแผนยุทธ์สำหรับงานวิชาการ" แบบย่อ A4</li>
+            <li>Buddy System จับคู่กับ OPD (88.4%)</li>
+            <li>ติดตามผลทุก 2 สัปดาห์โดยหัวหน้าฝ่าย</li>
+          </ul>
+        </div>
+        <div class="rec-card urgent">
+          <h4 style="color:#b91c1c;">🚨 เร่งด่วน: ช่องทางสื่อสาร (54%)</h4>
+          <ul>
+            <li>สร้าง LINE Group เฉพาะแชร์วิสัยทัศน์/แผนยุทธ์</li>
+            <li>ติดโปสเตอร์สรุปวิสัยทัศน์-MOPHDMS ทุกหน่วย</li>
+            <li>มอบหมาย "ทูตแผนยุทธ์" ประจำแต่ละหน่วยงาน</li>
+            <li>IPD2 ต้องดำเนินการเร่งด่วน ช่องทางสื่อสาร 48%</li>
+          </ul>
+        </div>
+        <div class="rec-card medium-r">
+          <h4 style="color:#92400e;">⚠ ปานกลาง: D (Determination) 68%</h4>
+          <ul>
+            <li>Workshop นวัตกรรมและการคิดเชิงสร้างสรรค์</li>
+            <li>เชื่อมโยงแผนปฏิบัติที่ 3 (พัฒนาวิชาการ) กับงานประจำ</li>
+            <li>จัด R2R Fair ประจำปี เพื่อกระตุ้น D-value</li>
+          </ul>
+        </div>
+        <div class="rec-card medium-r">
+          <h4 style="color:#92400e;">⚠ ปานกลาง: S (Specialist) 71%</h4>
+          <ul>
+            <li>ส่งเสริม CQI/R2R ที่เชื่อมกับแผนปฏิบัติราชการ</li>
+            <li>กำหนดเป้าผลงานวิชาการรายบุคคลในการประเมิน</li>
+            <li>จัดแลกเปลี่ยนเรียนรู้ระหว่างสายวิชาชีพ</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <div class="card-header"><div class="card-title">📈 แผนพัฒนา 3 ระยะ</div></div>
+        <div class="bar-chart">
+          <div class="bar-item"><div class="bar-meta"><strong>ระยะสั้น 0-1 เดือน: แก้ไขเร่งด่วน (ช่องทางสื่อสาร + กลุ่มวิชาการ)</strong><span style="color:#ef4444;">ดำเนินการทันที</span></div><div class="bar-track"><div class="bar-fill low" style="width:100%"></div></div></div>
+          <div class="bar-item"><div class="bar-meta"><strong>ระยะกลาง 1-3 เดือน: Workshop + Buddy System + D&S value</strong><span style="color:#f59e0b;">ไตรมาส 2-3</span></div><div class="bar-track"><div class="bar-fill medium" style="width:75%"></div></div></div>
+          <div class="bar-item"><div class="bar-meta"><strong>ระยะยาว 3-12 เดือน: วัฒนธรรมองค์กร + KPI รับรู้ปีถัดไป</strong><span style="color:#059669;">ปีงบ 2570</span></div><div class="bar-track"><div class="bar-fill good" style="width:40%"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== EXPORT ===== -->
+    <div id="page-export" class="page">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('📊 กำลัง Export Excel...')">
+          <div style="font-size:40px;margin:8px 0;">📊</div>
+          <h3 style="font-weight:700;color:var(--primary);margin-bottom:6px;">Export Excel</h3>
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px;">Raw data 57 ข้อ + สรุปตาม 4 หน่วยงาน</p>
+          <button class="btn btn-success" style="width:100%;">⬇ Excel (.xlsx)</button>
+        </div>
+        <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('📄 กำลัง Export PDF...')">
+          <div style="font-size:40px;margin:8px 0;">📄</div>
+          <h3 style="font-weight:700;color:var(--primary);margin-bottom:6px;">Export PDF</h3>
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px;">รายงานสรุปสำหรับประชุมบริหาร</p>
+          <button class="btn btn-primary" style="width:100%;">⬇ PDF Report</button>
+        </div>
+        <div class="card" style="text-align:center;cursor:pointer;" onclick="showToast('🔗 คัดลอก Link แล้ว!')">
+          <div style="font-size:40px;margin:8px 0;">🔗</div>
+          <h3 style="font-weight:700;color:var(--primary);margin-bottom:6px;">Share Dashboard</h3>
+          <p style="font-size:12px;color:var(--text-light);margin-bottom:14px;">แชร์ Link ให้ผู้บริหารดู Real-time</p>
+          <button class="btn btn-outline" style="width:100%;">📋 Copy Link</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<div class="toast" id="toast"><span id="toast-msg">✅ บันทึกสำเร็จ!</span></div>
+
+<script>
+// ===== PAGE NAVIGATION =====
+const pageTitles = {
+  landing:   ['หน้าหลัก', 'ภาพรวมระบบและสถานะการประเมิน ปีงบ 2569'],
+  form:      ['เข้าทำแบบประเมิน', 'แบบสอบถาม 4 ส่วน 57 ข้อ — Anonymous'],
+  dashboard: ['Dashboard ผู้บริหาร', 'วิเคราะห์ผลแบบ Real-time แยกตามหน่วยงานและส่วนของแบบสอบถาม'],
+  heatmap:   ['Heat Map จุดอ่อน', 'แสดงจุดอ่อน-จุดแข็ง ตามหน่วยงาน × ส่วนของแบบสอบถาม'],
+  report:    ['รายงานผลรายหน่วยงาน', 'เปรียบเทียบ 4 หน่วยงาน OPD/IPD1/IPD2/วิชาการพยาบาล'],
+  recommend: ['ข้อเสนอแนะเชิงกลยุทธ์', 'ระบบวิเคราะห์และแนะนำแนวทางพัฒนาอัตโนมัติ'],
+  export:    ['Export รายงาน', 'ดาวน์โหลด PDF/Excel สำหรับประชุมบริหาร'],
+};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('page-title').textContent = pageTitles[id][0];
+  document.getElementById('page-sub').textContent = pageTitles[id][1];
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick') === `showPage('${id}')`) n.classList.add('active');
+  });
+  if (id === 'dashboard' || id === 'landing' || id === 'report' || id === 'recommend') {
+    setTimeout(() => {
+      document.querySelectorAll('.bar-fill').forEach(b => {
+        const w = b.style.width; b.style.width = '0';
+        setTimeout(() => { b.style.width = w; }, 80);
+      });
+    }, 50);
+  }
+  if (id === 'form') currentStep = 1;
+}
+
+// ===== FORM STEPS =====
+let currentStep = 1;
+const stepLabels = ['', 'ส่วนที่ 1: ข้อมูลทั่วไป', 'ส่วนที่ 2: การรับรู้วิสัยทัศน์/พันธกิจ/แผน', 'ส่วนที่ 3: การนำไปปฏิบัติและค่านิยม MOPHDMS', 'ส่วนที่ 4: ช่องทางสื่อสารและข้อเสนอแนะ'];
+
+function updateStepUI(step) {
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('dot' + i);
+    dot.className = 'step-dot';
+    if (i < step) dot.classList.add('done'), dot.textContent = '✓';
+    else if (i === step) dot.classList.add('active'), dot.textContent = i;
+    else dot.textContent = i;
+    if (i < 4) {
+      const line = document.getElementById('line' + i);
+      line.className = 'step-line' + (i < step ? ' done' : '');
+    }
+  }
+  document.getElementById('stepLabel').textContent = stepLabels[step];
+  document.getElementById('formProgress').style.width = (step * 25) + '%';
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('formStep' + step).classList.add('active');
+  currentStep = step;
+}
+
+function goStep(step) { if (step < currentStep) updateStepUI(step); }
+function nextStep(step) { updateStepUI(step); window.scrollTo(0, 0); }
+function prevStep(step) { updateStepUI(step); window.scrollTo(0, 0); }
+
+function submitForm() {
+  document.querySelectorAll('.form-section').forEach(s => s.classList.remove('active'));
+  document.getElementById('formSuccess').classList.add('active');
+  document.getElementById('formProgress').style.width = '100%';
+  showToast('✅ ส่งแบบประเมินสำเร็จ! ขอบคุณครับ/ค่ะ');
+}
+
+function resetForm() {
+  document.getElementById('formSuccess').classList.remove('active');
+  updateStepUI(1);
+}
+
+// ===== GENERATE MOPHDMS Questions =====
+const mophdmsGroups = [
+  { letter: 'M', name: 'Mastery', label: 'เป็นนายตนเอง', desc: 'หมั่นฝึกฝนตนเองให้มีศักยภาพ ยึดมั่นในความถูกต้อง มีวินัย ปฏิบัติตามกฎระเบียบ บนพื้นฐานของการมีสำนึกรับผิดชอบ คุณธรรมและจริยธรรม', qs: [
+    [18,'ท่านรักษาเวลาอย่างเคร่งครัดในการทำงาน ส่งงานตรงเวลา'],
+    [19,'ท่านปฏิบัติต่อบุคคลอื่นอย่างเสมอภาคโดยไม่เลือกปฏิบัติ'],
+    [20,'ท่านใช้ทรัพยากรในการปฏิบัติงานอย่างเหมาะสมและคุ้มค่า'],
+    [21,'ท่านพัฒนาตนเองอย่างต่อเนื่องและสม่ำเสมอ'],
+    [22,'ท่านมีความรับผิดชอบต่องานในหน้าที่'],
+    [23,'ท่านปฏิบัติงานบนพื้นฐานข้อมูลเชิงประจักษ์'],
+  ]},
+  { letter: 'O', name: 'Originality', label: 'เร่งสร้างสิ่งใหม่', desc: 'สร้างสรรค์นวัตกรรมหรือสิ่งใหม่ที่เหมาะสมและมีประสิทธิภาพเพื่อให้เกิดประโยชน์ต่อระบบสุขภาพ', qs: [
+    [24,'ท่านใฝ่เรียนรู้สิ่งใหม่ เช่น ได้นำความรู้จากงานวิจัย/ความรู้ใหม่ๆมาปรับปรุงงาน'],
+    [25,'ท่านเปิดใจรับฟังความคิดเห็นของบุคคลอื่น'],
+    [26,'ท่านมีแนวคิดปรับปรุงกระบวนการปฏิบัติงานให้สอดคล้องกับความเปลี่ยนแปลง'],
+    [27,'ท่านกล้านำเสนอความคิดเห็นอย่างสร้างสรรค์'],
+    [28,'ท่านมีการคิดวิเคราะห์และทดลองสิ่งใหม่'],
+    [29,'ท่านนำความผิดพลาดที่เกิดขึ้นในอดีตมาเป็นบทเรียน'],
+  ]},
+  { letter: 'P', name: 'People Centered', label: 'ใส่ใจประชาชน', desc: 'ยึดประชาชนเป็นศูนย์กลางในการทำงานเพื่อประโยชน์อันดีแก่ประชาชน โดยใช้หลักเข้าใจ เข้าถึง พึ่งได้', qs: [
+    [30,'ท่านยินยอมสละเวลาส่วนตัวมาปฏิบัติงานเมื่อเกิดความจำเป็น'],
+    [31,'ท่านมีจิตอาสา ใส่ใจในปัญหาของบุคคลอื่น'],
+    [32,'ท่านให้ข้อมูลที่เป็นประโยชน์แก่ผู้รับบริการ'],
+    [33,'ท่านให้บริการแก่ผู้รับบริการอย่างเท่าเทียม'],
+    [34,'ท่านยอมรับและรับฟังความคิดเห็นของบุคคลอื่น'],
+  ]},
+  { letter: 'H', name: 'Humility', label: 'ถ่อมตน อ่อนน้อม', desc: 'มีสัมมาคารวะ มีน้ำใจให้อภัย รับฟังความคิดเห็น เสียสละเพื่อประโยชน์ส่วนรวม', qs: [
+    [35,'ท่านเป็นมิตร ยิ้มแย้มทักทายบุคคลอื่นอยู่เสมอ'],
+    [36,'ท่านใส่ใจในปัญหาของบุคคลอื่น'],
+    [37,'ท่านให้คำแนะนำช่วยเหลือบุคคลอื่น'],
+    [38,'ท่านยินยอมเสียสละผลประโยชน์ส่วนตนเพื่อประโยชน์ส่วนรวม'],
+    [39,'ท่านมีน้ำใจเอื้อเฟื้อ'],
+  ]},
+  { letter: 'D', name: 'Determination', label: 'พร้อมนำระดับชาติ', desc: 'กำหนดทิศทางการแพทย์ที่สมคุณค่าของประเทศ', qs: [
+    [40,'ท่านใส่ใจเรียนรู้รอบด้าน'],
+    [41,'ท่านเปิดใจยอมรับการเปลี่ยนแปลง'],
+    [42,'ท่านสร้างเครือข่ายการปฏิบัติงานระดับนานาชาติ'],
+    [43,'ท่านต่อยอดคิดค้นนวัตกรรมใหม่ๆ'],
+    [44,'ท่านคิดนอกกรอบอย่างสร้างสรรค์'],
+  ]},
+  { letter: 'M', name: 'Moving Together', label: 'สามารถไปด้วยกัน', desc: 'พัฒนาเพื่อยกระดับการแพทย์ของประเทศให้มีความเสมอภาค', qs: [
+    [45,'ท่านเปิดใจรับฟังความคิดเห็นของบุคคลอื่น'],
+    [46,'ท่านกล้าแสดงความคิดเห็นในที่ประชุม'],
+    [47,'ท่านเชื่อมั่นในตนเองและเพื่อนร่วมงาน'],
+    [48,'ท่านปฏิบัติงานร่วมกับหน่วยงานทั้งภายในและภายนอกได้เป็นอย่างดี'],
+    [49,'ท่านใช้ข้อมูลในการปฏิบัติงาน และมีการแบ่งปันข้อมูลระหว่างผู้ปฏิบัติงานร่วมกัน'],
+  ]},
+  { letter: 'S', name: 'Specialist', label: 'มุ่งมั่นสู่ความเป็นเลิศ', desc: 'รู้ลึก รู้จริง เป็นเลิศด้านการแพทย์เฉพาะทาง', qs: [
+    [50,'ท่านมีความรู้ในงานที่ทำเป็นอย่างดียิ่ง'],
+    [51,'ท่านมีการค้นคว้าวิจัยมาพัฒนาองค์ความรู้และวิธีการปฏิบัติงาน'],
+    [52,'ท่านมีการต่อยอดพัฒนางานวิจัย'],
+    [53,'ท่านให้เกียรติในทุกสายอาชีพ'],
+    [54,'ท่านแบ่งปันข้อมูลระหว่างผู้ปฏิบัติงาน โดยสามารถอ้างอิงได้'],
+  ]},
+];
+
+function buildMOPHDMS() {
+  const container = document.getElementById('mophdms-questions');
+  let html = '';
+  mophdmsGroups.forEach(group => {
+    html += `<div class="section-group-header" style="margin-top:14px;">
+      <h4>${group.letter} — ${group.name}: ${group.label}</h4>
+      <p>"${group.desc}"</p>
+    </div>`;
+    group.qs.forEach(([num, text]) => {
+      html += `<div class="likert-block">
+        <div class="likert-q-text">ข้อ ${num}. ${text}</div>
+        <div class="likert-scale-row">
+          ${[5,4,3,2,1].map((v,i) => {
+            const labels = ['5<br>มากที่สุด','4<br>มาก','3<br>ปานกลาง','2<br>น้อย','1<br>น้อยที่สุด'];
+            return `<div class="likert-opt">
+              <input type="radio" name="q${num}" id="q${num}_${v}" value="${v}">
+              <label for="q${num}_${v}">${labels[i]}</label>
+            </div>`;
+          }).join('')}
+        </div>
+      </div>`;
+    });
+  });
+  container.innerHTML = html;
+}
+buildMOPHDMS();
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Animate bars on init
+setTimeout(() => {
+  document.querySelectorAll('.bar-fill').forEach(b => {
+    const w = b.style.width; b.style.width = '0';
+    setTimeout(() => { b.style.width = w; }, 100);
+  });
+}, 100);
+</script>
+</body>
+</html>
